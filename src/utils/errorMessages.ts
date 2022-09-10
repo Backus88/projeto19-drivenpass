@@ -15,7 +15,7 @@ export function notValidEntrie (entity: string){
 export function notPossibleOperation(entity:string){
 	return {
 		type: "error_not_possible",
-		message: `Not possible "${entity} "already exists!`
+		message: `Not possible "${entity}"!`
 	};
 }
 

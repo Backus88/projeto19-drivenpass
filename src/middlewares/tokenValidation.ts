@@ -5,7 +5,7 @@ import {notFoundError, notAuthorized} from '../utils/errorMessages';
 
 dotenv.config();
 
-export default function credentialsValidation(req: Request, res : Response, next: NextFunction) {
+export default function tokenValidation(req: Request, res : Response, next: NextFunction) {
     const {authorization} = req.headers;
     const token = authorization?.replace('Bearer ', '');
     if(!token){
