@@ -8,7 +8,8 @@ dotenv.config();
 export default function tokenValidation(req: Request, res : Response, next: NextFunction) {
     const {authorization} = req.headers;
     const token = authorization?.replace('Bearer ', '');
-    if(!token){
+    console.log(token);
+    if(!token || token === 'Bearer'){
         throw notFoundError('token');
     }
     const key = process.env.SECRET_KEY;
@@ -19,7 +20,7 @@ export default function tokenValidation(req: Request, res : Response, next: Next
 
     jwt.verify(token, key, (err, payload)=>{
       if (err) {
-        throw notAuthorized('password');
+        throw notAuthorized('token');
       }
       res.locals ={
         payload: payload
