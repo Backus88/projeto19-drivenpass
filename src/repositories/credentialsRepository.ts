@@ -1,5 +1,5 @@
 import client from "../config/database";
-import { schemaCredentials, insertCredentials } from "../types/types"; 
+import { insertCredentials } from "../types/types"; 
 
 export async function getCredentialsByUserIdAndTitle(title: string, userId: number){
     return await client.credentials.findMany({

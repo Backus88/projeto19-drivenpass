@@ -8,7 +8,7 @@ import { notFoundError, notPossibleOperation} from "../utils/errorMessages";
 import { crypt, decrypt } from '../utils/cryptrInfo';
 import {decryptArray} from '../utils/decryptArray';
 
-export async function checkUniqueCredentials(credential:schemaCredentials,userId: number,){
+export async function checkUniqueCredentials(credential:schemaCredentials,userId: number){
     const thereisTitle = await getCredentialsByUserIdAndTitle(credential.title,userId);
     if(thereisTitle.length >0){
         throw notPossibleOperation("title already exists");
