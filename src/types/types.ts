@@ -1,4 +1,4 @@
-import { Users, Credentials, SafetyNotes, Cards } from "@prisma/client";
+import { Users, Credentials, SafetyNotes, Cards, Wifi } from "@prisma/client";
 
 //Users Types
 export type InsertUser  = Omit<Users, 'id'>;
@@ -14,3 +14,7 @@ export type schemaNotes = Omit<SafetyNotes, 'id'| 'userId'>;
 //Card Types
 export type insertCards = Omit<Cards, 'id'>;
 export type schemaCards = Omit<Cards, 'id' | 'userId'>;
+
+//Wifi Types
+export type insertWifis = Omit<Wifi, 'id'>;
+export type schemaWifis = Omit<Wifi, 'id' | 'userId'>;

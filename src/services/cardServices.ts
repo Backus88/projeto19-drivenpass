@@ -6,12 +6,20 @@ import {insertCard,
     getCardsByUserIdAndTitle,
     getCardsById,
     getCardsByUserIdAndId,
-    deleteById} from '../repositories/cardRepository';
+    deleteById,
+    getUniqueCardNumber} from '../repositories/cardRepository';
 
 export async function checkUniqueCards(card:schemaCards,userId: number){
     const thereisCard = await getCardsByUserIdAndTitle(card.cardHolderName,userId);
     if(thereisCard.length >0){
         throw notPossibleOperation("title already exists");
+    }
+}
+
+export async function checkCardNumberUnique (cardNumber:string){
+    const thereIsCardNumber = await getUniqueCardNumber(cardNumber)
+    if(thereIsCardNumber){
+        throw notPossibleOperation('cardNumber already exists');
     }
 }
 

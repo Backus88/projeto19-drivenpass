@@ -1,5 +1,6 @@
+import { Cards } from "@prisma/client";
 import client from "../config/database";
-import {insertCards} from '../types/types'
+import {insertCards} from '../types/types';
 
 export async function getCardsByUserIdAndTitle(cardHolderName: string, userId: number){
     return await client.cards.findMany({
@@ -35,6 +36,14 @@ export async function deleteById(id: number){
     await client.cards.delete({
         where:{
             id:id
+        }
+    })
+}
+
+export async function getUniqueCardNumber(cardNumber: string):Promise<Cards| null>{
+    return await client.cards.findUnique({
+        where:{
+            cardNumber:cardNumber
         }
     })
 }
