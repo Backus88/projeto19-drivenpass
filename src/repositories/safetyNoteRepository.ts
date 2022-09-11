@@ -13,3 +13,28 @@ export async function getNotesByUserIdAndTitle(title: string, userId: number){
 export async function insertNote (note: insertNotes){
     await client.safetyNotes.create({data:note})
 }
+
+export async function getNotesById(userId: number){
+    return await client.safetyNotes.findMany({
+        where:{
+            userId:userId
+        }
+    })
+}
+
+export async function getNotesByUserIdAndId(id: number, userId: number){
+    return await client.safetyNotes.findMany({
+        where:{
+            userId: userId,
+            id: id
+        }
+    })
+}
+
+export async function deleteById(id: number){
+    await client.safetyNotes.delete({
+        where:{
+            id:id
+        }
+    })
+}
