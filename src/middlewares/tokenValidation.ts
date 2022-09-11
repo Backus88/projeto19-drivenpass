@@ -8,7 +8,6 @@ dotenv.config();
 export default function tokenValidation(req: Request, res : Response, next: NextFunction) {
     const {authorization} = req.headers;
     const token = authorization?.replace('Bearer ', '');
-    console.log(token);
     if(!token || token === 'Bearer'){
         throw notFoundError('token');
     }
