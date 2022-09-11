@@ -1,14 +1,14 @@
 import { Router } from "express";
 import tokenValidation from "../middlewares/tokenValidation";
 import validateCardType from "../middlewares/cardTypeValidation";
-import {createCards} from '../controllers/cardController'
+import {createCards, showCards, showCardsById, deleteCards} from '../controllers/cardController'
 
 
 const cardRouter = Router();
 
 cardRouter.post('/cards',tokenValidation,validateCardType, createCards);
-cardRouter.get('/cards',tokenValidation);
-cardRouter.get('/cards/:id',tokenValidation);
-cardRouter.delete('/cards/:id',tokenValidation);
+cardRouter.get('/cards',tokenValidation, showCards);
+cardRouter.get('/cards/:id',tokenValidation, showCardsById);
+cardRouter.delete('/cards/:id',tokenValidation, deleteCards);
 
 export default cardRouter
