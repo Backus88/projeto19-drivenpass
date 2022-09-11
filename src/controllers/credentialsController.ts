@@ -1,6 +1,11 @@
 import {Request, Response} from 'express';
 import { schemaCredentials } from "../types/types"; 
-import {checkUniqueCredentials, createCredential, getCredentials, getCredentialsTitle} from '../services/credentialsServices';
+import {canDelete,
+    checkUniqueCredentials,
+    createCredential,
+    getCredentials,
+    getCredentialsId,
+    deleteCredentialsById} from '../services/credentialsServices';
 
 export async function createCredentials(req:Request, res:Response){
     const credential : schemaCredentials = req.body;
@@ -18,10 +23,19 @@ export async function showCredentials(req: Request, res: Response){
     res.status(200).send(credentials);
 }
 
-export async function showCredentialsByTitle(req: Request, res: Response){
+export async function showCredentialsById(req: Request, res: Response){
     const {payload}: any = res.locals;
-    const title : string = req.params.title;
+    const id : number = parseInt(req.params.id);
     const userId : number = parseInt(payload.userId);
-    const credentials = await getCredentialsTitle(userId, title);
+    const credentials = await getCredentialsId(userId, id);
     res.status(200).send(credentials);
+}
+
+export async function deleteCredentials (req: Request, res: Response){
+    const {payload}: any = res.locals;
+    const id : number = parseInt(req.params.id);
+    const userId : number = parseInt(payload.userId);
+    await canDelete(id, userId);
+    await deleteCredentialsById(id)
+    res.status(201).send('Deleted');
 }

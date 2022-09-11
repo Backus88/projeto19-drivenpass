@@ -21,3 +21,21 @@ export async function getCredentialsById(userId: number){
         }
     })
 }
+
+export async function getCredentialsByUserIdAndId(id: number, userId: number){
+    return await client.credentials.findMany({
+        where:{
+            userId: userId,
+            id: id
+        }
+    })
+}
+
+export async function deleteById(id: number){
+    await client.credentials.delete({
+        where:{
+            id:id
+        }
+    })
+}
+

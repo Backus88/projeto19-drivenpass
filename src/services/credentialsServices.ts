@@ -1,4 +1,8 @@
-import {getCredentialsByUserIdAndTitle, insertCredential, getCredentialsById} from '../repositories/credentialsRepository';
+import {getCredentialsByUserIdAndTitle, 
+    insertCredential, 
+    getCredentialsById, 
+    getCredentialsByUserIdAndId, 
+    deleteById} from '../repositories/credentialsRepository';
 import { schemaCredentials, insertCredentials } from "../types/types"; 
 import { notFoundError, notPossibleOperation} from "../utils/errorMessages";
 import { crypt, decrypt } from '../utils/cryptrInfo';
@@ -30,12 +34,23 @@ export async function getCredentials(userId: number){
     return decryptArray(data, 'password');
 }
 
-export async function getCredentialsTitle(userId: number, title: string){
-    const data = await getCredentialsByUserIdAndTitle(title, userId);
+export async function getCredentialsId(userId: number, id: number){
+    const data = await getCredentialsByUserIdAndId(id, userId);
     if(data.length ===0){
-        throw notFoundError('userId or title');
+        throw notFoundError('userId or id');
     }
     const credentials = data[0];
     credentials.password = decrypt(credentials.password);
     return credentials
+}
+
+export async function canDelete (id: number, userId: number ){
+    const data = await getCredentialsByUserIdAndId(id, userId);
+    if(data.length ===0){
+        throw notFoundError('userId or id');
+    }
+}
+
+export async function deleteCredentialsById (id: number){
+    await deleteById(id)
 }
