@@ -7,5 +7,5 @@ exports.createUserSchema = void 0;
 const joi_1 = __importDefault(require("joi"));
 exports.createUserSchema = joi_1.default.object({
     email: joi_1.default.string().email().required(),
-    password: joi_1.default.string().min(1).max(128).required()
+    password: joi_1.default.string().min(10).max(128).required()
 });
